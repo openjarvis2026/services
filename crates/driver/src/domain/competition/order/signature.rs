@@ -1,4 +1,7 @@
-use {crate::domain::eth, model::signature::EcdsaSignature, shared::bytes::Bytes};
+use {
+    model::signature::EcdsaSignature,
+    shared::{domain::eth, bytes::Bytes},
+};
 
 /// Signature over the order data.
 #[derive(Debug, Clone)]

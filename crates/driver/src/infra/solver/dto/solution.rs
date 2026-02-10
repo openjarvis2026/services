@@ -2,7 +2,6 @@ use {
     crate::{
         domain::{
             competition::{self, solution::WrapperCall},
-            eth,
             liquidity,
         },
         infra::Solver,
@@ -13,7 +12,7 @@ use {
         DomainSeparator,
         order::{BuyTokenDestination, OrderData, OrderKind, SellTokenSource},
     },
-    shared::bytes::Bytes,
+    shared::{domain::eth, bytes::Bytes},
     std::{collections::HashMap, str::FromStr},
 };
 

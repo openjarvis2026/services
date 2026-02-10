@@ -6,7 +6,6 @@ use {
                 self,
                 order::{self, Partial},
             },
-            eth::{self, Ether, allowance},
             liquidity,
         },
         infra::{self, solver::ManageNativeToken},
@@ -19,7 +18,10 @@ use {
     contracts::alloy::{FlashLoanRouter::LoanRequest, WETH9},
     itertools::Itertools,
     num::Zero,
-    shared::bytes::Bytes,
+    shared::{
+        bytes::Bytes,
+        domain::eth::{self, Ether, allowance},
+    },
 };
 
 #[derive(Debug, thiserror::Error)]
@@ -423,9 +425,10 @@ struct Flags {
 
 pub mod codec {
     use {
-        crate::domain::{competition::order, eth},
+        crate::domain::competition::order,
         alloy::primitives::U256,
         contracts::alloy::GPv2Settlement,
+        shared::domain::eth,
     };
 
     pub(super) fn trade(trade: &super::Trade) -> GPv2Settlement::GPv2Trade::Data {
@@ -488,7 +491,7 @@ pub mod codec {
     pub fn signature(signature: &order::Signature) -> super::Bytes<Vec<u8>> {
         match signature.scheme {
             order::signature::Scheme::Eip712 | order::signature::Scheme::EthSign => {
-                signature.data.clone()
+                signature.data.clone().0.into()
             }
             order::signature::Scheme::Eip1271 => {
                 [signature.signer.as_slice(), signature.data.0.as_slice()]

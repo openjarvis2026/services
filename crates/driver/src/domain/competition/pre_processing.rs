@@ -4,7 +4,6 @@ use {
         domain::{
             competition::order::{SellTokenBalance, app_data::AppData},
             cow_amm,
-            eth,
             liquidity,
         },
         infra::{self, api::routes::solve::dto::SolveRequest, observe::metrics, tokens},
@@ -22,6 +21,7 @@ use {
     shared::{
         account_balances::{BalanceFetching, Query},
         bytes::Bytes,
+        domain::eth,
         price_estimation::trade_verifier::balance_overrides::BalanceOverrideRequest,
         signature_validator::SignatureValidating,
     },
@@ -460,7 +460,7 @@ impl Utilities {
                     },
                     kind: order::Kind::Limit,
                     side: template.order.kind.into(),
-                    app_data: order::app_data::AppDataHash(Bytes(template.order.app_data.0)).into(),
+                    app_data: order::app_data::AppDataHash(template.order.app_data.0.into()).into(),
                     buy_token_balance: template.order.buy_token_balance.into(),
                     sell_token_balance: template.order.sell_token_balance.into(),
                     partial: match template.order.partially_fillable {
