@@ -12,7 +12,7 @@ use {
         DomainSeparator,
         order::{BuyTokenDestination, OrderData, OrderKind, SellTokenSource},
     },
-    shared::{domain::eth, bytes::Bytes},
+    shared::{bytes::Bytes, domain::eth},
     std::{collections::HashMap, str::FromStr},
 };
 

@@ -160,7 +160,7 @@ mod utils {
         use {
             crate::infra::notify::liquidity_sources::liquorice::notifier::utils::extract_rfq_id_from_interaction,
             alloy::primitives::Address,
-            shared::{domain::eth, bytes::Bytes}
+            shared::{bytes::Bytes, domain::eth},
         };
 
         #[test]

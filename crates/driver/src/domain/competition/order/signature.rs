@@ -1,6 +1,6 @@
 use {
     model::signature::EcdsaSignature,
-    shared::{domain::eth, bytes::Bytes},
+    shared::{bytes::Bytes, domain::eth},
 };
 
 /// Signature over the order data.

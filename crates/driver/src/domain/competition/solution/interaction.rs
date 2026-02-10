@@ -1,9 +1,6 @@
 use {
     crate::domain::{self, liquidity},
-    shared::{
-        domain::eth::{self, Flashloan, TokenAddress},
-        bytes::Bytes,
-    },
+    shared::{bytes::Bytes, domain::eth},
 };
 
 /// Interaction with a smart contract which is needed to execute this solution

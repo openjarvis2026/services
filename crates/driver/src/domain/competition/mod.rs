@@ -22,7 +22,7 @@ use {
     futures::{StreamExt, future::Either, stream::FuturesUnordered},
     hyper::body::Bytes as RequestBytes,
     itertools::Itertools,
-    shared::{domain::eth, bytes::Bytes},
+    shared::{bytes::Bytes, domain::eth},
     simulator::{RevertError, SimulatorError},
     std::{
         cmp::Reverse,
@@ -734,10 +734,7 @@ impl Competition {
     }
 
     /// Returns whether the settlement can be executed or would revert.
-    async fn simulate_settlement(
-        &self,
-        settlement: &Settlement,
-    ) -> Result<(), simulator::Error> {
+    async fn simulate_settlement(&self, settlement: &Settlement) -> Result<(), simulator::Error> {
         let tx = settlement.transaction(settlement::Internalization::Enable);
         let gas_needed_for_tx = self.simulator.gas(tx).await?;
         if gas_needed_for_tx > settlement.gas.limit {
